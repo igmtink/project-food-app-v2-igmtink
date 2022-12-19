@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import FoodForm from './components/AvailableFoods/FoodForm'
+import NavBar from './components/Layout/NavBar'
+import Homepage from './components/Page/Homepage'
+
+import { useState, useCallback } from 'react'
 
 function App() {
+  const [isFoodForm, setIsFoodForm] = useState(false)
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      setIsFoodForm(false)
+    }
+  })
+
+  const foodFormHandler = useCallback(() => {
+    setIsFoodForm(true)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main className="max-w-2xl mx-auto h-screen">
+      <NavBar onFoodForm={foodFormHandler} />
+      <Homepage />
+      {isFoodForm && <FoodForm />}
+    </main>
+  )
 }
 
-export default App;
+export default App
