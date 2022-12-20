@@ -35,7 +35,6 @@ const FoodForm = props => {
     const generatedId = productData.name
     const createdProduct = { id: generatedId, ...product }
 
-    console.log(createdProduct)
     props.onAddProduct(createdProduct)
   }
 

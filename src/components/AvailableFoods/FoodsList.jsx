@@ -1,6 +1,7 @@
 import { useHttp } from '../../hooks/hooks-igmtink'
 import { useState, useEffect } from 'react'
 import FoodItem from './FoodItem'
+import FoodForm from './FoodForm'
 
 const FoodsList = props => {
   const { isLoading, error, sendRequest: fetchData } = useHttp()
@@ -19,7 +20,6 @@ const FoodsList = props => {
         })
       }
 
-      console.log(props.product)
       setFoods(foodsLoaded)
     }
 
@@ -30,6 +30,10 @@ const FoodsList = props => {
       foodsDataConfig
     )
   }, [fetchData])
+
+  const savedProductHandler = product => {
+    setFoods(prevFoods => prevFoods.concat(product))
+  }
 
   const foodsList = foods.map(food => (
     <FoodItem
@@ -62,7 +66,18 @@ const FoodsList = props => {
     )
   }
 
-  return <div className="h-full">{content}</div>
+  return (
+    <>
+      {props.isAddProductShow && (
+        <FoodForm
+          onAddProductShow={props.onAddProductShow}
+          onAddProduct={savedProductHandler}
+        />
+      )}
+
+      <div className="h-full">{content}</div>
+    </>
+  )
 }
 
 export default FoodsList
