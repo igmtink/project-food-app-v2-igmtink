@@ -39,4 +39,9 @@ const Input = props => {
   return <input className={classes} {...props.attr} />
 }
 
-export { Section, Card, Modal, Button, Input }
+const TextArea = props => {
+  let classes = 'w-full ' + props.className
+  return <textarea className={classes} {...props.attr} />
+}
+
+export { Section, Card, Modal, Button, Input, TextArea }

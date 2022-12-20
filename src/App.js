@@ -5,23 +5,29 @@ import Homepage from './components/Page/Homepage'
 import { useState, useCallback } from 'react'
 
 function App() {
-  const [isFoodForm, setIsFoodForm] = useState(false)
+  const [isAddProductShow, setIsAddProductShow] = useState(false)
+
+  const closeAddProductHandler = useCallback(() => {
+    setIsAddProductShow(false)
+  }, [])
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      setIsFoodForm(false)
+      closeAddProductHandler()
     }
   })
 
-  const foodFormHandler = useCallback(() => {
-    setIsFoodForm(true)
+  const openAddProductHandler = useCallback(() => {
+    setIsAddProductShow(true)
   }, [])
 
   return (
     <main className="max-w-2xl mx-auto h-screen">
-      <NavBar onFoodForm={foodFormHandler} />
-      <Homepage />
-      {isFoodForm && <FoodForm />}
+      <NavBar onAddProductShow={openAddProductHandler} />
+      <Homepage
+        isAddProductShow={isAddProductShow}
+        onAddProductShow={closeAddProductHandler}
+      />
     </main>
   )
 }

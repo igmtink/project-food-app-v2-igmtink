@@ -18,6 +18,8 @@ const FoodsList = props => {
           price: items[key].price
         })
       }
+
+      console.log(props.product)
       setFoods(foodsLoaded)
     }
 

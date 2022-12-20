@@ -6,7 +6,7 @@ const NavBar = props => {
       <div className="flex justify-between">
         <span className="font-bold">Cheeses Fries</span>
         <nav className="flex gap-4">
-          <Button attr={{ onClick: props.onFoodForm }}>
+          <Button attr={{ onClick: props.onAddProductShow }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
