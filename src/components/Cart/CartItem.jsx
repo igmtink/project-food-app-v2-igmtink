@@ -1,3 +1,6 @@
+import { Input } from '../UI/IgmtInk'
+import { useInput } from '../../hooks/hooks-igmtink'
+
 const CartItem = props => {
   const price = props.price.toFixed(2)
 

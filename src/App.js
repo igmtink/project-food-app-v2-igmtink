@@ -28,7 +28,7 @@ function App() {
           isAddProductShow={isAddProductShow}
           onAddProductShow={closeAddProductHandler}
           cartIsShow={cartIsShow}
-          cartHideHandler={cartHideHandler}
+          onCartHide={cartHideHandler}
         />
       </CartProvider>
     </main>

@@ -18,7 +18,7 @@ const Homepage = props => {
           onAddProductShow={props.onAddProductShow}
         />
       </Card>
-      {props.cartIsShow && <CartList />}
+      {props.cartIsShow && <CartList onCartHide={props.onCartHide} />}
     </Section>
   )
 }

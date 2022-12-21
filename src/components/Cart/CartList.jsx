@@ -1,4 +1,4 @@
-import { Modal } from '../UI/IgmtInk'
+import { Button, Modal } from '../UI/IgmtInk'
 import CartContext from '../../store/Cart/cart-context'
 import { useContext } from 'react'
 import CartItem from './CartItem'
@@ -30,7 +30,22 @@ const CartList = props => {
     <Modal className="bg-neutral-800 p-4 flex flex-col animate-slide-down h-[567px]">
       <h1 className="text-yellow-500 font-bold text-2xl">Foods Cart</h1>
       {content}
-      <div className="text-right">Total Amount: {cartCtx.totalAmount}</div>
+      <div className="grid grid-cols-1 gap-2 justify-items-end">
+        <span className="font-bold">Total Amount: {cartCtx.totalAmount}</span>
+        <div className="flex gap-2">
+          <Button
+            className="bg-red-500 hover:bg-red-500/75 py-2 px-4 rounded-md font-bold"
+            attr={{ onClick: props.onCartHide }}
+          >
+            CLOSE
+          </Button>
+          {cartList.length > 0 && (
+            <Button className="bg-neutral-900 hover:bg-neutral-900/75 py-2 px-4 rounded-md font-bold">
+              ORDER
+            </Button>
+          )}
+        </div>
+      </div>
     </Modal>
   )
 }
