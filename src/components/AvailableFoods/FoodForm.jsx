@@ -27,7 +27,7 @@ const FoodForm = props => {
     valueChangeHandler: priceChangeHandler,
     inputBlurHandler: priceBlurHandler,
     reset: priceReset
-  } = useInput(0, value => value > 0)
+  } = useInput('', value => value > 0)
 
   const { isLoading, error, sendRequest: addProduct } = useHttp()
 
