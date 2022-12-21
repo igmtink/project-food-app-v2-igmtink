@@ -1,5 +1,7 @@
 import { useInput } from '../../hooks/hooks-igmtink'
 import { Button, Input } from '../UI/IgmtInk'
+import CartContext from '../../store/Cart/cart-context'
+import { useContext, useCallback } from 'react'
 
 const FoodItem = props => {
   const {
@@ -9,9 +11,28 @@ const FoodItem = props => {
     valueChangeHandler,
     inputBlurHandler,
     reset
-  } = useInput(value => value !== 0)
+  } = useInput(0, value => value > 0)
 
   const price = props.price.toFixed(2)
+
+  const cartCtx = useContext(CartContext)
+
+  const addToCartHandler = useCallback(() => {
+    if (!isValid) {
+      inputBlurHandler()
+      return
+    }
+
+    cartCtx.onAdd({
+      id: props.id,
+      name: props.name,
+      description: props.description,
+      price: props.price,
+      quantity: value
+    })
+
+    reset()
+  }, [isValid])
 
   return (
     <li className="grid grid-cols-1 gap-6 border-b-neutral-700 border-b-2 last:border-b-0 py-4 first:pt-0 animate-shake">
@@ -23,15 +44,22 @@ const FoodItem = props => {
         <span className="text-yellow-500 font-medium">P{price}</span>
         <div className="flex items-center gap-2">
           <Input
-            className="bg-neutral-900 text-center px-2 py-1 rounded-xl w-16"
+            className={`bg-neutral-900 text-center px-2 py-1 rounded-xl w-16 ${
+              hasError &&
+              'bg-red-500 outline-red-900 outline-2 outline-none placeholder-black'
+            }`}
             attr={{
               type: 'number',
               min: 0,
-              defaultValue: 0,
-              onChange: valueChangeHandler
+              onChange: valueChangeHandler,
+              onBlur: inputBlurHandler,
+              value: value
             }}
           />
-          <Button className="rounded-full bg-neutral-900 p-2">
+          <Button
+            className="rounded-full bg-neutral-900 p-2"
+            attr={{ onClick: addToCartHandler }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

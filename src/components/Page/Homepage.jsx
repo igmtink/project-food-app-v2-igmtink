@@ -1,4 +1,5 @@
 import FoodsList from '../AvailableFoods/FoodsList'
+import CartList from '../Cart/CartList'
 import { Section, Card } from '../UI/IgmtInk'
 
 const Homepage = props => {
@@ -17,6 +18,7 @@ const Homepage = props => {
           onAddProductShow={props.onAddProductShow}
         />
       </Card>
+      {props.cartIsShow && <CartList />}
     </Section>
   )
 }

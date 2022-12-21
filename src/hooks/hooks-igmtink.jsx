@@ -1,7 +1,6 @@
 import { useState, useCallback, useReducer } from 'react'
 
 // -------------------- CUSTOM HTTP HOOK -------------------- //
-
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -38,32 +37,31 @@ const useHttp = () => {
 }
 
 // -------------------- CUSTOM INPUT HOOK -------------------- //
-
-const initialInputState = {
-  value: '',
-  isTouched: false
-}
-
-const inputStateReducer = (state, action) => {
-  if (action.type === 'INPUT') {
-    return { value: action.value, isTouched: state.isTouched }
+const useInput = (defaultValue, validateValue) => {
+  const defaultReducer = {
+    value: defaultValue,
+    isTouched: false
   }
 
-  if (action.type === 'BLUR') {
-    return { isTouched: true, value: state.value }
+  const inputStateReducer = (state, action) => {
+    if (action.type === 'INPUT') {
+      return { value: action.value, isTouched: state.isTouched }
+    }
+
+    if (action.type === 'BLUR') {
+      return { isTouched: true, value: state.value }
+    }
+
+    if (action.type === 'RESET') {
+      return { value: defaultValue, isTouched: false }
+    }
+
+    return defaultValue
   }
 
-  if (action.type === 'RESET') {
-    return { value: '', isTouched: false }
-  }
-
-  return initialInputState
-}
-
-const useInput = validateValue => {
   const [inputState, dispatchInput] = useReducer(
     inputStateReducer,
-    initialInputState
+    defaultReducer
   )
 
   const valueIsValid = validateValue(inputState.value)
@@ -91,4 +89,29 @@ const useInput = validateValue => {
   }
 }
 
-export { useHttp, useInput }
+// -------------------- CUSTOM MODAL HOOK -------------------- //
+const useModal = () => {
+  const [modalIsShow, setModalIsShow] = useState(false)
+
+  const hideModalHandler = () => {
+    setModalIsShow(false)
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      hideModalHandler()
+    }
+  })
+
+  const showModalHandler = () => {
+    setModalIsShow(true)
+  }
+
+  return {
+    modalIsShow,
+    showModalHandler,
+    hideModalHandler
+  }
+}
+
+export { useHttp, useInput, useModal }

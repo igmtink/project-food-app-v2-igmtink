@@ -9,7 +9,7 @@ const FoodForm = props => {
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
     reset: nameReset
-  } = useInput(value => value.trim() !== '')
+  } = useInput('', value => value.trim() !== '')
 
   const {
     value: descriptionValue,
@@ -18,7 +18,7 @@ const FoodForm = props => {
     valueChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
     reset: descriptionReset
-  } = useInput(value => value.trim() !== '')
+  } = useInput('', value => value.trim() !== '')
 
   const {
     value: priceValue,
@@ -27,7 +27,7 @@ const FoodForm = props => {
     valueChangeHandler: priceChangeHandler,
     inputBlurHandler: priceBlurHandler,
     reset: priceReset
-  } = useInput(value => value > 0)
+  } = useInput(0, value => value > 0)
 
   const { isLoading, error, sendRequest: addProduct } = useHttp()
 
@@ -41,7 +41,10 @@ const FoodForm = props => {
   const submitHandler = e => {
     e.preventDefault()
 
-    if (!nameIsValid || !descriptionIsValid || priceIsValid < 1) {
+    if (!nameIsValid || !descriptionIsValid || !priceIsValid) {
+      nameBlurHandler()
+      descriptionBlurHandler()
+      priceBlurHandler()
       console.log('Invalid')
       return
     }
