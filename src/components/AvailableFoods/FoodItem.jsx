@@ -28,7 +28,7 @@ const FoodItem = props => {
       name: props.name,
       description: props.description,
       price: props.price,
-      quantity: value
+      quantity: +value
     })
 
     reset()
@@ -41,7 +41,7 @@ const FoodItem = props => {
         <h3 className="line-clamp-3 text-white/70">{props.description}</h3>
       </div>
       <div className="flex justify-between items-center w-full">
-        <span className="text-yellow-500 font-medium">P{price}</span>
+        <span className="text-yellow-500 font-medium">₱{price}</span>
         <div className="flex items-center gap-2">
           <Input
             className={`bg-neutral-900 text-center px-2 py-1 rounded-xl w-16 ${
@@ -57,14 +57,14 @@ const FoodItem = props => {
             }}
           />
           <Button
-            className="rounded-full bg-neutral-900 p-2"
+            className="rounded-full bg-neutral-900 p-2 hover:bg-neutral-900/75"
             attr={{ onClick: addToCartHandler }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-4 h-4 hover:fill-white/75 transition-colors"
+              className="w-4 h-4 transition-colors"
             >
               <path
                 fillRule="evenodd"

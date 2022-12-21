@@ -1,5 +1,4 @@
-import { Input } from '../UI/IgmtInk'
-import { useInput } from '../../hooks/hooks-igmtink'
+import { Button } from '../UI/IgmtInk'
 
 const CartItem = props => {
   const price = props.price.toFixed(2)
@@ -11,8 +10,42 @@ const CartItem = props => {
         <h3 className="line-clamp-3 text-white/70">{props.description}</h3>
       </div>
       <div className="flex justify-between items-center w-full">
-        <span className="text-yellow-500 font-medium">P{price}</span>
-        <div className="flex items-center gap-2"></div>
+        <span className="text-yellow-500 font-medium">₱{price}</span>
+        <div className="flex items-center gap-2">
+          <Button
+            className="rounded-full bg-neutral-900 p-2 hover:bg-neutral-900/75"
+            attr={{ onClick: props.onRemove }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
+            </svg>
+          </Button>
+          <span>x{props.quantity}</span>
+          <Button
+            className="rounded-full bg-neutral-900 p-2 hover:bg-neutral-900/75"
+            attr={{ onClick: props.onAdd }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-4 h-4 transition-colors"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </Button>
+        </div>
       </div>
     </li>
   )
