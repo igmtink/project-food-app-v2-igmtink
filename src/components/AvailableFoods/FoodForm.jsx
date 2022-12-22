@@ -51,7 +51,7 @@ const FoodForm = props => {
 
     addProduct(
       {
-        url: 'https://project-food-app-v2-igmtink-default-rtdb.firebaseio.com/foods.json',
+        url: process.env.REACT_APP_FOODS_DB,
         method: 'POST',
         body: {
           name: nameValue,
@@ -76,7 +76,25 @@ const FoodForm = props => {
 
   return (
     <Modal className="bg-neutral-800 p-4 grid grid-cols-1 gap-6 animate-slide-down">
-      <h1 className="text-yellow-500 font-bold text-2xl">Add Product</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-yellow-500 font-bold text-2xl">Add Product</h1>
+        <Button attr={{ onClick: props.onHideAddProduct }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4 hover:stroke-white/75 transition-colors"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </Button>
+      </div>
       <form onSubmit={submitHandler} className="grid grid-cols-1 gap-4">
         <Input
           className={`bg-neutral-900 rounded-md p-2 ${
@@ -119,10 +137,10 @@ const FoodForm = props => {
             }}
           />
           <Button
-            className="bg-yellow-500 hover:bg-yellow-500/75 text-neutral-900 font-bold rounded-md py-2 px-4"
+            className="bg-yellow-500 hover:bg-yellow-500/75 text-neutral-900 font-medium rounded-md py-2 px-4 text-sm"
             attr={{ type: 'submit' }}
           >
-            {isLoading ? 'Sending...' : 'Add'}
+            {isLoading ? 'Adding...' : 'ADD'}
           </Button>
         </div>
       </form>

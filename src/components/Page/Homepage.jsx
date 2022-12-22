@@ -16,6 +16,7 @@ const Homepage = props => {
         <FoodsList
           isAddProductShow={props.isAddProductShow}
           onAddProductShow={props.onAddProductShow}
+          onHideAddProduct={props.onHideAddProduct}
         />
       </Card>
       {props.cartIsShow && <CartList onCartHide={props.onCartHide} />}

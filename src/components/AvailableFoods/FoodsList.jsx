@@ -25,7 +25,7 @@ const FoodsList = props => {
 
     fetchData(
       {
-        url: 'https://project-food-app-v2-igmtink-default-rtdb.firebaseio.com/foods.json'
+        url: process.env.REACT_APP_FOODS_DB
       },
       foodsDataConfig
     )
@@ -72,6 +72,7 @@ const FoodsList = props => {
       {props.isAddProductShow && (
         <FoodForm
           onAddProductShow={props.onAddProductShow}
+          onHideAddProduct={props.onHideAddProduct}
           onAddProduct={savedProductHandler}
         />
       )}

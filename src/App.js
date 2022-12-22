@@ -27,6 +27,7 @@ function App() {
         <Homepage
           isAddProductShow={isAddProductShow}
           onAddProductShow={closeAddProductHandler}
+          onHideAddProduct={closeAddProductHandler}
           cartIsShow={cartIsShow}
           onCartHide={cartHideHandler}
         />

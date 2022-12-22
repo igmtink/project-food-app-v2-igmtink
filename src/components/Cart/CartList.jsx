@@ -46,13 +46,13 @@ const CartList = props => {
         <span className="font-bold">Total Amount: ₱{totalAmount}</span>
         <div className="flex gap-2">
           <Button
-            className="bg-red-500 hover:bg-red-500/75 py-2 px-4 rounded-md font-bold"
+            className="bg-red-500 hover:bg-red-500/75 text-sm py-2 px-4 rounded-md font-medium"
             attr={{ onClick: props.onCartHide }}
           >
             CLOSE
           </Button>
           {cartList.length > 0 && (
-            <Button className="bg-neutral-900 hover:bg-neutral-900/75 py-2 px-4 rounded-md font-bold">
+            <Button className="bg-neutral-900 hover:bg-neutral-900/75 text-sm py-2 px-4 rounded-md font-medium">
               ORDER
             </Button>
           )}
