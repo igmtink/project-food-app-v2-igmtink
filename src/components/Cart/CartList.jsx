@@ -46,7 +46,7 @@ const CartList = props => {
   )
 
   if (cartList.length > 0) {
-    content = <ul className="pt-6 h-full overflow-auto">{cartList}</ul>
+    content = <ul className="h-full overflow-auto">{cartList}</ul>
   }
 
   let section
@@ -59,7 +59,7 @@ const CartList = props => {
     )
   } else {
     section = (
-      <section className="flex flex-col h-full">
+      <section className="flex flex-col gap-6 h-full">
         <h1 className="text-yellow-500 font-bold text-2xl">Foods Cart</h1>
         {content}
         <div className="grid grid-cols-1 gap-2 justify-items-end">
@@ -86,7 +86,7 @@ const CartList = props => {
   }
 
   return (
-    <Modal className="bg-neutral-800 p-4 animate-slide-down h-[567px]">
+    <Modal className="bg-neutral-800 p-4 absolute top-0 bottom-0 right-0 w-80 animate-slide-right-to-left">
       {section}
     </Modal>
   )

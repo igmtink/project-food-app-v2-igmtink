@@ -26,13 +26,18 @@ module.exports = {
           '30%': { transform: 'scale(1.1)' },
           '50%': { transform: 'scale(1.15)' },
           '100%': { transform: 'scale(1)' }
+        },
+        'slide-right-to-left': {
+          from: { opacity: '0', transform: 'translateX(3rem)' },
+          to: { opacity: '1', transform: 'translateX(0)' }
         }
       },
       animation: {
         'slide-down': 'slide-down 300ms ease-out forwards',
         'slide-up': 'slide-up 1s ease-out forwards',
         'fade-in-out': 'fadein 0.5s, fadeout 0.5s 2.5s',
-        shake: 'shake 300ms ease-out'
+        shake: 'shake 300ms ease-out',
+        'slide-right-to-left': 'slide-right-to-left 300ms ease-out forwards'
       }
     }
   },

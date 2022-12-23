@@ -15,7 +15,7 @@ const Modal = props => {
 
   return ReactDOM.createPortal(
     <section className="fixed inset-0 flex justify-center items-center bg-black/75 z-30">
-      <div className="w-full max-w-2xl mx-auto z-40 p-8">
+      <div className="w-full max-w-2xl mx-auto z-40 p-8 relative self-stretch">
         <div className={classes} {...props.attr}>
           {props.children}
         </div>

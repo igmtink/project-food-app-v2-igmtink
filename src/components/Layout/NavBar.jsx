@@ -23,8 +23,8 @@ const NavBar = props => {
   }, [cartItems])
 
   return (
-    <header className="px-8 py-4 fixed left-0 right-0 backdrop-blur-md z-20">
-      <div className="max-w-3xl mx-auto flex justify-between">
+    <header className="py-4 fixed left-0 right-0 backdrop-blur-md z-20">
+      <div className="px-8 max-w-2xl mx-auto flex justify-between">
         <span className="font-bold">Cheeses Fries</span>
         <nav className="flex gap-4">
           <Button attr={{ onClick: props.onAddProductShow }}>
