@@ -1,8 +1,9 @@
 import { Button, Modal } from '../UI/IgmtInk'
 import CartContext from '../../store/Cart/cart-context'
-import { useContext, useState } from 'react'
+import { useContext, useState, useCallback } from 'react'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
+import { useHttp } from '../../hooks/hooks-igmtink'
 
 const CartList = props => {
   const [isCheckout, setIsCheckout] = useState(false)
@@ -39,6 +40,23 @@ const CartList = props => {
 
   const totalAmount = cartCtx.totalAmount.toFixed(2)
 
+  const { isLoading, error, sendRequest: submitOrder } = useHttp()
+
+  const submitOrderHandler = useCallback(
+    userData => {
+      submitOrder({
+        url: process.env.REACT_APP_FOODS_ORDERS_DB,
+        method: 'POST',
+        body: {
+          user: userData,
+          orderedItems: { Products: cartCtx.items, totalAmount: totalAmount }
+        },
+        headers: { 'Content-Type': 'application/json' }
+      })
+    },
+    [cartCtx.items]
+  )
+
   let content = (
     <div className="h-full flex items-center justify-center">
       No Cart Found.
@@ -54,7 +72,12 @@ const CartList = props => {
   if (isCheckout) {
     section = (
       <section className="h-full">
-        <Checkout onBack={orderCancelHandler} onCloseCart={props.onCartHide} />
+        <Checkout
+          onLoading={isLoading}
+          onCheckout={submitOrderHandler}
+          onBack={orderCancelHandler}
+          onCloseCart={props.onCartHide}
+        />
       </section>
     )
   } else {

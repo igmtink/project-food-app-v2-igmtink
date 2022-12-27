@@ -65,9 +65,7 @@ const Checkout = props => {
     countryReset()
     postalReset()
 
-    cartCtx.clearCart()
-
-    // if (!props.onLoading) {
+    // if (!props.isLoading) {
     //   props.onCloseCart()
     // }
   }
@@ -156,9 +154,9 @@ const Checkout = props => {
           className="bg-yellow-500 hover:bg-yellow-500/75 text-sm py-3 px-4 rounded-md font-medium text-neutral-900"
           attr={{ type: 'submit' }}
         >
-          {props.onLoading
-            ? 'Sending payment...'
-            : `Complete payment — ₱${cartCtx.totalAmount}`}
+          {!props.isLoading &&
+            `Complete payment &mdash; ₱${cartCtx.totalAmount}`}
+          {props.isLoading && 'Sending payment...'}
         </Button>
       </form>
     </div>
